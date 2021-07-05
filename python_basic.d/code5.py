@@ -210,9 +210,25 @@ class Account:
 
     def deposit(self, money):
         self.__balance += money
+        print("depotsit:",self.__balance)
     def withdraw(self, money):
         self.__balance -= money
-    def transfer(self, who):
-    
+        print("withdraw:",self.__balance)
+    def transfer(self, money, who):
+        self.__balance -= money
+        who.__balance += money
+        print("my_balance :",self.__balance)
     def showBalance(self):
         print("my_balance :",self.__balance)
+
+me = Account(1234,50000)
+you = Account(1234,100000)
+
+me.showBalance()
+you.showBalance()
+me.deposit(5000)
+me.withdraw(5000)
+me.transfer(10000,you)
+you.showBalance()
+
+
