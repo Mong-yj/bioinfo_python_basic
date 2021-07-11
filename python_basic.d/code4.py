@@ -145,7 +145,7 @@ number = int(input("Write fibonacci number: "))
 def fibonacci(num):
     print('n_th pivo:',num)
     l_result = [0,1]
-    for i in range(2,num):
+    for i in range(2,num+1):
         result = l_result[i-2]+l_result[i-1]
         l_result.append(result)
     print(result)
