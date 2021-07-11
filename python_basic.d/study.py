@@ -48,7 +48,6 @@ for i,j in dataset:
         d_result[j] = 1
 for i,j in sorted(d_result.items()):
     print(j)
-"""
 
 # RNA Splicing
 seq1 = 'ATGGTCTACATAGCTGACAAACAGCACGTAGCAATCGGTCGAATCTCGAGAGGCATATGGTCACATGATCGGTCGAGCGTGTTTCAAAGTTTGCGCCTAG'
@@ -84,5 +83,34 @@ while 1:
     if seq_len == len(seq1):
         break
 print(splicing)
+"""
+# 12 Finding a Protein Motif
+import re
 
+p = re.compile("N[^P][S][^P]")
+p2 = re.compile("N[^P][T][^P]")
 
+with open("rosalind_mprt.txt", "r") as handle:
+    protein_name = handle.readlines()
+for n in protein_name:
+    name = n.strip()
+    with open("{}.fasta".format(name), "r") as f:
+        content = f.readlines()
+    seq = content[1:]
+    for s in range(len(seq)):
+        seq[s] = seq[s].strip()
+    seq = "".join(seq)
+
+    result1 = p.finditer(seq)
+    result2 = p2.finditer(seq)
+
+    l_result = [int(r.start()) + 1 for r in result1]
+    for r in result2:
+        l_result.append(int(r.start()) + 1)
+    l_result = list(set(l_result))
+    l_result.sort()
+
+    print(name)
+    for i in l_result:
+        print(i, end=" ")
+    print()
